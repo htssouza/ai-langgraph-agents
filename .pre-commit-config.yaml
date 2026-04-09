@@ -1,0 +1,25 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+        args: ["--maxkb=2048"]
+      - id: detect-private-key
+      - id: check-merge-conflict
+
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+        args: ["--baseline", ".secrets.baseline"]
+
+  - repo: local
+    hooks:
+      - id: block-env-files
+        name: Block .env files
+        entry: "bash -c 'for f in \"$@\"; do if echo \"$f\" | grep -qE \"^\\.env($|\\.)\" && ! echo \"$f\" | grep -qE \"\\.example$\"; then echo \"BLOCKED: $f — do not commit .env files\"; exit 1; fi; done' --"
+        language: system
+        types: [file]
