@@ -18,6 +18,7 @@ dependencies = [
     "langgraph-prebuilt>=1.0.9",
     "langgraph-sdk>=0.3.13",
     "langsmith>=0.7.29",
+    "mypy>=1.20.0",
     "notebook>=7.5.5",
     "pre-commit>=4.5.1",
     "pygments>=2.20.0",
